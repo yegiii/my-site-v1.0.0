@@ -1,6 +1,6 @@
 import { interpolate } from "flubber";
 import { useTransform } from "framer-motion";
-import type { BlobData } from "../components/BlobMorpher";
+import type { BlobData } from "../components/BlobShape";
 
 const useFlubber = (progress: any, paths: BlobData[]) => {
   return useTransform(
