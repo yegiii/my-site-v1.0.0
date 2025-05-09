@@ -1,0 +1,24 @@
+{
+  "sections": [
+    {
+      "title": "About",
+      "icon": "AboutMe" 
+    },
+    {
+      "title": "Links",
+      "icon": "Chain" 
+    },
+    {
+      "title": "Works",
+      "icon": "Work"  
+    },
+    {
+      "title": "Projects",
+      "icon": "Monitor" 
+    },
+    {
+      "title": "Contact",
+      "icon": "Email"  
+    }
+  ]
+}
