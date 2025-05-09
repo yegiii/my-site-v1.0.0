@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, animate, useMotionValue, useTransform } from "framer-motion";
-import { interpolate } from "flubber";
 import useFlubber from "../hooks/useFlubber";
 
 export interface BlobData {
@@ -22,18 +21,21 @@ const paths: BlobData[] = [
   },
 ];
 
-const colors: string[] = [
-  "#16d1f2",
-  "#000000",
-  "#3b5998",
-  "#CD201F",
-];
+const colors: string[] = ["#16d1f2", "#000000", "#3b5998", "#CD201F"];
 
+const SVG_WIDTH = 100;
+const ORIGSPEEDX = 10;
+const ORIGSPEEDY = 10;
 
-const BlobMorpher = () => {
+const BlobMorpher = ({ width }: { width: string }) => {
   const [pathIndex, setPathIndex] = useState(0);
   const progress = useMotionValue(pathIndex);
-  const fill = useTransform(progress, paths.map((_, i) => i), colors);
+  
+  const fill = useTransform(
+    progress,
+    paths.map((_, i) => i),
+    colors
+  );
   const path = useFlubber(progress, paths);
 
   useEffect(() => {
@@ -42,24 +44,59 @@ const BlobMorpher = () => {
       ease: "easeInOut",
       onComplete: () => {
         setPathIndex((prev) => (prev === paths.length - 1 ? 0 : prev + 1));
-      }
+      },
     });
     return () => animation.stop();
   }, [pathIndex, progress]);
 
+  const [x, setX] = useState(-400);
+  const [speedX, setSpeedX] = useState(ORIGSPEEDX);
+  const [y, setY] = useState(0);
+  const [speedY, setSpeedY] = useState(ORIGSPEEDY);
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <svg width="300" height="300" viewBox="0 0 200 200">
-        <g transform="translate(100 100)">
-          <motion.path 
-            fill={fill} 
-            d={path} 
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2 }}
-          />
-        </g>
-      </svg>
+    <div className="container">
+      <div className="circleContainer">
+        <motion.div
+          animate={{ x: x, y: y }}
+          transition={{
+            ease: "linear",
+            //duration: 0.001
+            // repeat: Infinity
+          }}
+          onAnimationComplete={() => {
+            console.log(y, window.innerHeight);
+            setX(x + speedX);
+            setY(y + speedY);
+            if (x >= 0) {
+              setSpeedX(-ORIGSPEEDX);
+            }
+            if (x <= -window.innerWidth + SVG_WIDTH) {
+              setSpeedX(ORIGSPEEDX);
+            }
+
+            if (y >= window.innerHeight / 2) {
+              setSpeedY(-ORIGSPEEDY);
+            }
+
+            if (y <= -window.innerHeight / 2) {
+              setSpeedY(ORIGSPEEDY);
+            }
+          }}
+        >
+          <svg width={width} height="300" viewBox="0 0 200 200">
+            <g transform="translate(100 100)">
+              <motion.path
+                fill={fill}
+                d={path}
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2 }}
+              />
+            </g>
+          </svg>
+        </motion.div>
+      </div>
     </div>
   );
 };
