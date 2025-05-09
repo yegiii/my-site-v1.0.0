@@ -12,9 +12,14 @@ const iconComponents = {
   Email: Email,
 };
 
-const Card = ({ item }) => {
+type propType = {
+  item: {
+    icon: string;
+    title: string;
+  };
+};
 
-  // @ts-ignore
+const Card: React.FC<propType> = ({ item }) => {
   const IconComponent = iconComponents[item.icon];
 
   return (
@@ -23,7 +28,7 @@ const Card = ({ item }) => {
         className="flex flex-col justify-center items-center content-between gap-2 cursor-pointer transition-all duration-300 ease-in-out filter drop-shadow-[2px_3px_0px_rgba(0,0,0,0.2)] 
                     group-hover:drop-shadow-[3px_4px_0px_rgba(0,0,0,0.2)] group-hover:scale-105 group-active:scale-95"
       >
-       {!!IconComponent && <IconComponent size="lg" className="" />}
+        {!!IconComponent && <IconComponent size="lg" className="" />}
         <p className="text-lg font-bold text-center">{item.title}</p>
       </div>
     </div>
