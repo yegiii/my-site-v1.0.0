@@ -1,6 +1,5 @@
-// components/BlobShape.tsx
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import useFlubber from "../hooks/useFlubber";
 
 export interface BlobData {
@@ -24,25 +23,48 @@ const paths: BlobData[] = [
 
 const colors = ["#16d1f2", "#000000", "#3b5998", "#CD201F"];
 
-const BlobShape = () => {
-  const [pathIndex, setPathIndex] = useState(0);
+function shuffleArray<T>(array: T[]): T[] {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+interface BlobShapeProps {
+  randomSequence?: boolean;
+}
+
+const BlobShape = ({ randomSequence = false }: BlobShapeProps) => {
+  const [currentStep, setCurrentStep] = useState(0);
   const progress = useMotionValue(0);
-  const fill = useTransform(progress, paths.map((_, i) => i), colors);
+
+  // Create random or sequential order
+  const indexSequence = useMemo(() => {
+    const indices = paths.map((_, i) => i);
+    return randomSequence ? shuffleArray(indices) : indices;
+  }, [randomSequence]);
+
+  const fill = useTransform(progress, indexSequence, colors);
   const path = useFlubber(progress, paths);
 
   useEffect(() => {
-    const animation = animate(progress, pathIndex, {
+    const targetIndex = indexSequence[currentStep % indexSequence.length];
+
+    const animation = animate(progress, targetIndex, {
       duration: 4.0,
       ease: "easeInOut",
       onComplete: () => {
-        setPathIndex((prev) => (prev === paths.length - 1 ? 0 : prev + 1));
+        setCurrentStep((prev) => (prev + 1) % indexSequence.length);
       },
     });
+
     return () => animation.stop();
-  }, [pathIndex, progress]);
+  }, [currentStep, indexSequence, progress]);
 
   return (
-    <svg width="300" height="300" viewBox="0 0 200 200">
+    <svg width="500" height="500" viewBox="0 0 200 200">
       <g transform="translate(100 100)">
         <motion.path
           fill={fill}

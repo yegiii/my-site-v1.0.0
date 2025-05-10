@@ -1,9 +1,11 @@
-import { useState } from "react";
-import BlobMorpher from "./components/BlobMorpher";
+import BlobMover0 from "./components/BlobMover0";
+import BlobMover from "./components/BlobMover0";
+import BlobMover1 from "./components/BlobMover1";
+import BlobMover3 from "./components/BlobMover3";
+import BlobMover2 from "./components/BlobMover3";
+import BlobShape from "./components/BlobShape";
 
 export default function App() {
-  const [speed, setSpeed] = useState(1);
-
   return (
     // <div className="relative w-full min-h-screen overflow-hidden">
     //   {/* Bubbles - Now with guaranteed colors */}
@@ -39,8 +41,11 @@ export default function App() {
     //   </div>
     // </div>
 
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <BlobMorpher />
+    <div className="flex items-center justify-center w-screen h-screen filter blur-xl">
+      <BlobMover0 />
+      <BlobMover1 />
+      <BlobMover2 />
+      <BlobMover3 />
     </div>
   );
 }

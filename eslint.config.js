@@ -17,12 +17,20 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
-    rules: {
+     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
+      "@typescript-eslint/no-explicit-any": "off", // Disables the rule entirely
+      '@typescript-eslint/ban-ts-comment': [
+      'warn',
+      {
+        'ts-ignore': 'allow-with-description',
+        minimumDescriptionLength: 3, // Require a short description
+      },
+    ],
     },
   },
 )

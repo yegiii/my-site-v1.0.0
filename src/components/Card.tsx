@@ -4,7 +4,7 @@ import Email from "./icon/Email";
 import Monitor from "./icon/Monitor";
 import Work from "./icon/Work";
 
-const iconComponents = {
+const iconComponents: { [key: string]: React.FC } = {
   AboutMe: AboutMe,
   Chain: Chain,
   Work: Work,
