@@ -1,3 +1,3 @@
-const getIndex = (_: any, index: number) => index;
 
-export default getIndex;
+
+export const SVG_SIZE = 600;

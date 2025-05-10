@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import useFlubber from "../hooks/useFlubber";
+import { SVG_SIZE } from "../utils/utils";
 
 export interface BlobData {
   path: string;
@@ -21,7 +22,7 @@ const paths: BlobData[] = [
   },
 ];
 
-const colors = ["#16d1f2", "#000000", "#3b5998", "#CD201F"];
+const colors = ["#a2d2ff", "#AFD189", "#cdb4db", "#ffafcc"];
 
 function shuffleArray<T>(array: T[]): T[] {
   const copy = [...array];
@@ -64,7 +65,7 @@ const BlobShape = ({ randomSequence = false }: BlobShapeProps) => {
   }, [currentStep, indexSequence, progress]);
 
   return (
-    <svg width="500" height="500" viewBox="0 0 200 200">
+    <svg width={SVG_SIZE} height={SVG_SIZE} viewBox="0 0 200 200">
       <g transform="translate(100 100)">
         <motion.path
           fill={fill}

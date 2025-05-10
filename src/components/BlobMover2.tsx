@@ -4,7 +4,8 @@ import { motion, useMotionValue } from "framer-motion";
 import BlobShape from "./BlobShape";
 import useBounderies from "../hooks/useBounderies";
 
-const BlobMover3 = () => {
+
+const BlobMover2 = () => {
   const { minX, maxX, minY, maxY, randomInitialX, randomInitialY, ORIGSPEED } = useBounderies();
 
   // Use spring physics for smoother movement
@@ -72,5 +73,4 @@ const BlobMover3 = () => {
   );
 };
 
-
-export default BlobMover3;
+export default BlobMover2;

@@ -1,77 +1,76 @@
 // components/BlobMover.tsx
-import { useEffect, useMemo, useRef } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { useCallback, useEffect, useRef } from "react";
+import {  motion, useMotionValue } from "framer-motion";
 import BlobShape from "./BlobShape";
-
-const ORIGSPEEDX = 0.5;
-const ORIGSPEEDY = -0.5;
-const SVG_SIZE = 500;
+import useBounderies from "../hooks/useBounderies";
 
 const BlobMover0 = () => {
-  const randomInitialX = useMemo(
-    () =>
-      Math.random() * (window.innerWidth - SVG_SIZE) -
-      (window.innerWidth - SVG_SIZE) / 2,
-    []
-  );
-  const randomInitialY = useMemo(
-    () =>
-      Math.random() * (window.innerHeight - SVG_SIZE) -
-      (window.innerHeight - SVG_SIZE) / 2,
-    []
-  );
+  const { minX, maxX, minY, maxY, randomInitialX, randomInitialY, ORIGSPEED } = useBounderies();
+
+  // Use spring physics for smoother movement
   const x = useMotionValue(randomInitialX);
   const y = useMotionValue(randomInitialY);
+  const velocity = useRef(ORIGSPEED);
+  const lastPos = useRef({ x: randomInitialX, y: randomInitialY });
+  const frameCount = useRef(0);
 
-  const velocity = useRef({ x: ORIGSPEEDX, y: ORIGSPEEDY });
-
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
-  console.log(viewportWidth, viewportHeight);
+  // Throttled boundary checking (every 3 frames)
+  const checkBoundaries = useCallback((currentX: number, currentY: number) => {
+    frameCount.current += 1;
+    if (frameCount.current % 3 !== 0) return velocity.current;
+    
+    let newVx = velocity.current.x;
+    let newVy = velocity.current.y;
+    
+    if (currentX >= maxX || currentX <= minX) {
+      newVx *= -0.98; // Add slight damping
+      lastPos.current.x = Math.max(minX, Math.min(maxX, currentX));
+    }
+    
+    if (currentY >= maxY || currentY <= minY) {
+      newVy *= -0.98;
+      lastPos.current.y = Math.max(minY, Math.min(maxY, currentY));
+    }
+    
+    return { x: newVx, y: newVy };
+  }, [maxX, minX, maxY, minY]);
 
   useEffect(() => {
     let animationFrame: number;
-
     const move = () => {
       const currentX = x.get();
       const currentY = y.get();
-
-      // Getting bounderies
-      // Consider each side of the viewport + SVG_SIZE / 2
-      const minX = -viewportWidth - SVG_SIZE / 2;
-      const maxX = viewportWidth + SVG_SIZE / 2;
-      const minY = -viewportHeight - SVG_SIZE / 2;
-      const maxY = viewportHeight + SVG_SIZE / 2;
-
-      if (currentX >= maxX || currentX <= minX) {
-        velocity.current.x *= -1;
-        x.set(Math.max(minX, Math.min(maxX, currentX)));
-      }
-
-      if (currentY >= maxY || currentY <= minY) {
-        velocity.current.y *= -1;
-        y.set(Math.max(minY, Math.min(maxY, currentY)));
-      }
-
-      x.set(currentX + velocity.current.x);
-      y.set(currentY + velocity.current.y);
-
+      
+      // Only update velocity every 3 frames
+      velocity.current = checkBoundaries(currentX, currentY);
+      
+      // Apply movement using last cached position
+      x.set(lastPos.current.x + velocity.current.x);
+      y.set(lastPos.current.y + velocity.current.y);
+      lastPos.current = { x: x.get(), y: y.get() };
+      
       animationFrame = requestAnimationFrame(move);
     };
-
-    animationFrame = requestAnimationFrame(move);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [x, y, viewportHeight, viewportWidth]);
+    
+    // Start with setTimeout to allow initial render to complete
+    const startTimeout = setTimeout(() => {
+      animationFrame = requestAnimationFrame(move);
+    }, 50);
+    
+    return () => {
+      clearTimeout(startTimeout);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [x, y, checkBoundaries]);
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-      <div className="relative w-full h-full">
-        <motion.div style={{ x, y }}>
-          <BlobShape />
-        </motion.div>
-      </div>
+    <div className="absolute top-0 left-0 w-full h-full overflow-hidden filter blur-3xl">
+      <motion.div style={{ x, y }}>
+        <BlobShape randomSequence />
+      </motion.div>
     </div>
   );
 };
+
 
 export default BlobMover0;
