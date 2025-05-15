@@ -19,7 +19,7 @@ const WindowTab: React.FC<windowProps> = ({
   const { onClose } = useTabContext();
   return (
     <section
-      className={` w-full bg-amber-50 rounded-xl shadow-[4px_6px_0px_0px_rgba(0,_0,_0,_0.3)] border
+      className={` w-full bg-amber-50 rounded-xl shadow-lg border
       border-stone-700 ${className}`}
     >
       <div className="bg-stone-700 text-stone-200 px-4 py-3 rounded-t-lg flex justify-between items-center">

@@ -2,8 +2,6 @@ import WindowTab from "./WindowTab";
 import TabGrid from "./TabGrid";
 import Typewriter from "./TypeWritter";
 import DraggableWindow from "./DraggbleWindow";
-import { AnimatePresence, motion } from "framer-motion";
-import { useTabContext } from "../hooks/useTabContext";
 
 export interface SectionDataType {
   id: number;
@@ -13,7 +11,6 @@ export interface SectionDataType {
 };
 
 const Home = () => {
-  const { isWindowOpen } = useTabContext();
   return (
     <WindowTab title="Home" className="!w-2/3 lg:!w-1/2 z-10" showClose={false}>
       <div className="w-full p-6">
@@ -52,18 +49,7 @@ const Home = () => {
 
         <TabGrid />
 
-        <AnimatePresence>
-          {isWindowOpen && (
-            <motion.div
-              initial={{ scale: 0, opacity: 0, y: -100 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0, opacity: 0, y: -100 }}
-              transition={{ duration: 0.3 }}
-            >
-              <DraggableWindow />
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <DraggableWindow/>
       </div>
     </WindowTab>
   );
