@@ -1,8 +1,19 @@
 import WindowTab from "./WindowTab";
-import CardGrid from "./CardGrid";
+import TabGrid from "./TabGrid";
 import Typewriter from "./TypeWritter";
+import DraggableWindow from "./DraggbleWindow";
+import { AnimatePresence, motion } from "framer-motion";
+import { useTabContext } from "../hooks/useTabContext";
+
+export interface SectionDataType {
+  id: number;
+  title: string;
+  icon: string;
+  content: any;
+};
 
 const Home = () => {
+  const { isWindowOpen } = useTabContext();
   return (
     <WindowTab title="Home" className="!w-2/3 lg:!w-1/2 z-10" showClose={false}>
       <div className="w-full p-6">
@@ -39,7 +50,20 @@ const Home = () => {
           </div>
         </div>
 
-        <CardGrid />
+        <TabGrid />
+
+        <AnimatePresence>
+          {isWindowOpen && (
+            <motion.div
+              initial={{ scale: 0, opacity: 0, y: -100 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0, opacity: 0, y: -100 }}
+              transition={{ duration: 0.3 }}
+            >
+              <DraggableWindow />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </WindowTab>
   );

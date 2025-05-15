@@ -1,9 +1,10 @@
-import { MultiBlobContainer } from "./components/blob/MultiBlobContainer";
-import BlobMover0 from "./components/BlobMover0";
-import BlobMover1 from "./components/BlobMover1";
-import BlobMover3 from "./components/BlobMover3";
-import BlobMover2 from "./components/BlobMover3";
+// import BlobMover0 from "./components/BlobMover0";
+// import BlobMover1 from "./components/BlobMover1";
+// import BlobMover3 from "./components/BlobMover3";
+// import BlobMover2 from "./components/BlobMover3";
+import MultiBlobContainer from "./components/blob/MultiBlobContainer";
 import Home from "./components/Home";
+import { TabContextProvider } from "./store/TabContext";
 
 export default function App() {
   return (
@@ -12,9 +13,11 @@ export default function App() {
       <BlobMover1 />
       <BlobMover2 />
       <BlobMover3 /> */}
-      <MultiBlobContainer/>
+      {/* <MultiBlobContainer/> */}
       <div className="w-full h-screen flex items-center justify-center z-10">
-        <Home />
+        <TabContextProvider>
+          <Home />
+        </TabContextProvider>
       </div>
     </>
   );

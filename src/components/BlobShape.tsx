@@ -22,7 +22,7 @@ const paths: BlobData[] = [
   },
 ];
 
-const colors = ["#a2d2ff", "#AFD189", "#cdb4db", "#ffafcc"];
+const colors = ["#16d1f2", "#AFD189", "#cdb4db", "#ffafcc"];
 
 function shuffleArray<T>(array: T[]): T[] {
   const copy = [...array];

@@ -66,7 +66,7 @@ const BlobMover0 = () => {
   return (
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden filter blur-3xl">
       <motion.div style={{ x, y }}>
-        <BlobShape randomSequence />
+        <BlobShape  />
       </motion.div>
     </div>
   );

@@ -1,12 +1,12 @@
-import { useEffect, useRef } from 'react';
-import { motion, useMotionValue } from 'framer-motion';
-import BlobShape from '../BlobShape';
+import { useEffect, useRef } from "react";
+import { motion, useMotionValue } from "framer-motion";
+import BlobShape from "../BlobShape";
 
-const BLOB_COUNT = 4;
+// const BLOB_COUNT = 4;
 const SVG_SIZE = 500;
 const PHYSICS_UPDATE_INTERVAL = 2;
 
-function useBlobAnimations(count: number) {
+function useBlobAnimations() {
   // Initialize all motion values at the top level
   const x1 = useMotionValue(0);
   const y1 = useMotionValue(0);
@@ -22,19 +22,19 @@ function useBlobAnimations(count: number) {
     { x: x1, y: y1, velocity: { x: 1.5, y: 2.5 } },
     { x: x2, y: y2, velocity: { x: -1.5, y: 2.5 } },
     { x: x3, y: y3, velocity: { x: 1.5, y: -2.5 } },
-    { x: x4, y: y4, velocity: { x: -1.5, y: -2.5 } }
+    { x: x4, y: y4, velocity: { x: -1.5, y: -2.5 } },
   ]);
 
   return blobs;
 }
 
 export default function MultiBlobContainer() {
-  const blobs = useBlobAnimations(BLOB_COUNT);
+  const blobs = useBlobAnimations();
   const boundaries = useRef({
-    minX: -window.innerWidth + SVG_SIZE/2,
-    maxX: window.innerWidth - SVG_SIZE/2,
-    minY: -window.innerHeight + SVG_SIZE/2,
-    maxY: window.innerHeight - SVG_SIZE/2
+    minX: -window.innerWidth + SVG_SIZE / 2,
+    maxX: window.innerWidth - SVG_SIZE / 2,
+    minY: -window.innerHeight + SVG_SIZE / 2,
+    maxY: window.innerHeight - SVG_SIZE / 2,
   });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function MultiBlobContainer() {
 
     const updatePhysics = (deltaTime: number) => {
       const { minX, maxX, minY, maxY } = boundaries.current;
-      
+
       for (let i = 0; i < blobs.current.length; i++) {
         const blob = blobs.current[i];
         const currentX = blob.x.get();
@@ -54,7 +54,7 @@ export default function MultiBlobContainer() {
           blob.velocity.x *= -0.95;
           blob.x.set(currentX <= minX ? minX : maxX);
         }
-        
+
         if (currentY <= minY || currentY >= maxY) {
           blob.velocity.y *= -0.95;
           blob.y.set(currentY <= minY ? minY : maxY);
@@ -72,20 +72,20 @@ export default function MultiBlobContainer() {
       if (frameCount % PHYSICS_UPDATE_INTERVAL === 0) {
         updatePhysics(deltaTime);
       }
-      
+
       frameCount++;
       animationFrame = requestAnimationFrame(animate);
     };
 
     // Initialize positions
-    blobs.current.forEach(blob => {
+    blobs.current.forEach((blob) => {
       blob.x.set(
-        Math.random() * (boundaries.current.maxX - boundaries.current.minX) + 
-        boundaries.current.minX
+        Math.random() * (boundaries.current.maxX - boundaries.current.minX) +
+          boundaries.current.minX
       );
       blob.y.set(
-        Math.random() * (boundaries.current.maxY - boundaries.current.minY) + 
-        boundaries.current.minY
+        Math.random() * (boundaries.current.maxY - boundaries.current.minY) +
+          boundaries.current.minY
       );
     });
 
@@ -106,15 +106,20 @@ export default function MultiBlobContainer() {
         <motion.div
           key={i}
           style={{
-            position: 'absolute',
+            position: "absolute",
             x: blob.x,
             y: blob.y,
-            willChange: 'transform'
+            willChange: "transform",
+            filter: "blur(50px)",
           }}
         >
-          <BlobShape randomSequence />
+          <BlobShape
+            randomSequence
+            reducedPerformance={true} // Add this prop
+          />
         </motion.div>
       ))}
     </>
   );
 }
+

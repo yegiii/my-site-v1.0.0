@@ -19,7 +19,7 @@ type propType = {
   };
 };
 
-const Card: React.FC<propType> = ({ item }) => {
+const TabButton: React.FC<propType> = ({ item }) => {
   const IconComponent = iconComponents[item.icon];
 
   return (
@@ -35,4 +35,4 @@ const Card: React.FC<propType> = ({ item }) => {
   );
 };
 
-export default Card;
+export default TabButton;

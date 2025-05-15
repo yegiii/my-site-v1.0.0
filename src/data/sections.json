@@ -1,24 +1,34 @@
 {
   "sections": [
     {
+      "id": 1,
       "title": "About",
-      "icon": "AboutMe" 
+      "icon": "AboutMe",
+      "content": "About"
     },
     {
+      "id": 2,
       "title": "Links",
-      "icon": "Chain" 
+      "icon": "Chain",
+      "content": "Links"
     },
     {
+      "id": 3,
       "title": "Works",
-      "icon": "Work"  
+      "icon": "Work",
+      "content": "Works"
     },
     {
+      "id": 4,
       "title": "Projects",
-      "icon": "Monitor" 
+      "icon": "Monitor",
+      "content": "Projects"
     },
     {
+      "id": 5,
       "title": "Contact",
-      "icon": "Email"  
+      "icon": "Email",
+      "content": "Contact"
     }
   ]
 }
