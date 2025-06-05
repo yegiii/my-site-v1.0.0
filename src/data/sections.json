@@ -4,31 +4,31 @@
       "id": 1,
       "title": "About",
       "icon": "AboutMe",
-      "content": "About"
+      "contentComponent": "AboutContent"
     },
     {
       "id": 2,
       "title": "Links",
       "icon": "Chain",
-      "content": "Links"
+      "contentComponent": "LinksContent"
     },
     {
       "id": 3,
       "title": "Works",
       "icon": "Work",
-      "content": "Works"
+      "contentComponent": "WorksContent"
     },
     {
       "id": 4,
       "title": "Projects",
       "icon": "Monitor",
-      "content": "Projects"
+      "contentComponent": "ProjectsContent"
     },
     {
       "id": 5,
       "title": "Contact",
       "icon": "Email",
-      "content": "Contact"
+      "contentComponent": "ContactContent"
     }
   ]
 }

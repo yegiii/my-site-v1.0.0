@@ -2,12 +2,13 @@ import WindowTab from "./WindowTab";
 import TabGrid from "./TabGrid";
 import Typewriter from "./TypeWritter";
 import DraggableWindow from "./DraggbleWindow";
+import type { ComponentKeys } from "../utils/utils";
 
 export interface SectionDataType {
   id: number;
   title: string;
   icon: string;
-  content: any;
+  contentComponent: ComponentKeys;
 };
 
 const Home = () => {

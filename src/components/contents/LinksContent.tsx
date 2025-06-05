@@ -1,0 +1,14 @@
+// components/LinksSection.jsx
+const LinksContent = () => {
+    return (
+      <div className="p-4 bg-white">
+        <h2 className="text-xl font-bold mb-2">My Links</h2>
+        <ul className="space-y-2">
+          <li><a href="https://github.com/you">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/you">LinkedIn</a></li>
+        </ul>
+      </div>
+    );
+  };
+  
+  export default LinksContent;
