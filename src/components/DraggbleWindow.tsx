@@ -25,8 +25,9 @@ const DraggableWindow: React.FC = () => {
             <div style={{ position: "fixed", zIndex: tab.zIndex }}>
               <div className={`handle cursor-move p-2.5 w-96`}>
                 <WindowTab title={tab.title} tabId={tab.id}>
-                  
+               
                   {ContentComponent && <ContentComponent />}
+                
                 </WindowTab>
               </div>
             </div>
