@@ -20,6 +20,7 @@ const Typewriter: React.FC<TypeWriterProps> = ({
     const typing = setInterval(() => {
       if (i < text.length) {
         setDisplayText(text.substring(0, i + 1));
+        // Hi , i'm ...
         i++;
       } else {
         clearInterval(typing);
