@@ -13,28 +13,29 @@ const DraggableWindow: React.FC = () => {
       <AnimatePresence>
         {activeTabs.map((tab) => {
           const ContentComponent = componentMap[tab.contentComponent];
-         
-         return(<motion.div
-          key={tab.id}
-          initial={{ scale: 0, opacity: 0, y: -100 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0, opacity: 0, y: -100 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Draggable key={tab.id} defaultPosition={{ x: 600, y: -250 }}>
-            <div style={{ position: "fixed", zIndex: tab.zIndex }}>
-              <div className={`handle cursor-move p-2.5 w-96`}>
-                <WindowTab title={tab.title} tabId={tab.id}>
-               
-                  {ContentComponent && <ContentComponent />}
-                
-                </WindowTab>
-              </div>
-            </div>
-          </Draggable>
-        </motion.div>) 
-         
-})}
+
+          return (
+            <motion.div
+              key={tab.id}
+              initial={{ scale: 0, opacity: 0, y: -100 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0, opacity: 0, y: -100 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Draggable key={tab.id} defaultPosition={{ x: 0, y: -550 }}>
+                <div style={{ position: "fixed", zIndex: tab.zIndex }}>
+                  <div className={`handle cursor-move p-2.5 w-3xl`}>
+                    <WindowTab title={tab.title} tabId={tab.id}>
+                      <div className="max-h-80 overflow-y-scroll">
+                        {ContentComponent && <ContentComponent />}
+                      </div>
+                    </WindowTab>
+                  </div>
+                </div>
+              </Draggable>
+            </motion.div>
+          );
+        })}
       </AnimatePresence>
     </>
   );
