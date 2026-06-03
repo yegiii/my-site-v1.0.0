@@ -20,43 +20,136 @@ const WindowTab: React.FC<WindowProps> = ({
 
   return (
     <section
-      className={`
-        w-full rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)]
-        border border-white/20 backdrop-blur-xl
-        bg-gradient-to-br from-white/30 via-white/20 to-white/10
-        dark:from-zinc-800/40 dark:via-zinc-800/20 dark:to-zinc-900/10
-        transition-all duration-500 ${className}
-      `}
+    className={`
+      relative
+  
+      w-full rounded-[28px]
+  
+      bg-white/[0.05]
+  
+      border border-white/[0.10]
+  
+      backdrop-blur-[5rem]
+      backdrop-saturate-150
+  
+      shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+  
+      transition-all duration-500
+  
+      ${className}
+    `}
+  >
+    {/* glass reflection */}
+    <div
+      className="
+        pointer-events-none absolute
+        inset-x-0 top-0
+        h-24
+        rounded-[28px]
+  
+        bg-gradient-to-b
+        from-white/[0.12]
+        via-white/[0.04]
+        to-transparent
+      "
+    />
+  
+    {/* subtle liquid blob */}
+    <div
+      className="
+        pointer-events-none absolute
+  
+        -top-12 -right-12
+        h-32 w-32
+  
+        rounded-full
+        bg-white/[0.05]
+  
+        blur-3xl
+      "
+    />
+  
+    {/* edge lighting */}
+    <div
+      className="
+        pointer-events-none absolute
+        inset-0
+  
+        rounded-[28px]
+  
+        shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]
+      "
+    />
+  
+    {/* Header */}
+    <div
+      className="
+        relative z-10
+  
+        flex items-center justify-between
+  
+        px-5 py-4
+        rounded-[28px]
+  
+        border-b border-white/[0.08]
+  
+        bg-white/[0.03]
+  
+        text-white/90
+      "
     >
-      {/* Header */}
-      <div
-        className="
-          flex justify-between items-center px-4 py-3 rounded-t-2xl
-          bg-gradient-to-br from-white/40 to-white/10 dark:from-zinc-800/40 dark:to-zinc-900/20
-          backdrop-blur-2xl border-b border-white/20 dark:border-zinc-700/30
-          text-stone-800 dark:text-zinc-100 font-medium
-        "
-      >
-        <h3 className="select-none">{title}</h3>
-
-        {showClose && (
-          <button
-            onClick={() => onClose(tabId || 0)}
-            className="flex items-center justify-center size-8 rounded-full
-                       hover:bg-white/30 dark:hover:bg-zinc-700/40
-                       active:scale-90 transition-all duration-200"
-          >
-            <CgCloseR
-              className="size-5 text-zinc-800 dark:text-zinc-100
-                         hover:text-rose-500 transition-colors"
-            />
-          </button>
-        )}
-      </div>
-
-      {/* Body */}
-      <div className="p-4 text-zinc-900 dark:text-zinc-100">{children}</div>
-    </section>
+      <h3 className="select-none font-medium">
+        {title}
+      </h3>
+  
+      {showClose && (
+        <button
+          onClick={() => onClose(tabId || 0)}
+          className="
+           close-btn
+            flex items-center justify-center
+  
+            size-8 rounded-full
+  
+            bg-white/[0.04]
+  
+            border border-white/[0.08]
+  
+            transition-all duration-300
+  
+            hover:bg-white/[0.08]
+            hover:border-white/[0.14]
+  
+            active:scale-95
+          "
+        >
+          <CgCloseR
+            className="
+              size-4
+  
+              text-white/80
+  
+              transition-colors
+              hover:text-rose-400
+            "
+          />
+        </button>
+      )}
+    </div>
+  
+    {/* Body */}
+    <div
+      className="
+        relative z-10
+  
+        p-5
+  
+        text-white/85
+      "
+    >
+      {children}
+    </div>
+  </section>
   );
 };
 

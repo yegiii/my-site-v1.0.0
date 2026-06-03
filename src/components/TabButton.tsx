@@ -24,59 +24,80 @@ const TabButton: React.FC<propType> = ({ item }) => {
 
   return (
     <div className="w-full h-full group">
-      <div
-        className="
-        relative flex flex-col items-center justify-center gap-2
-        px-5 py-5 rounded-2xl
-        
-        backdrop-blur-xl
-        bg-black/[0.06]
-        border border-white/[0.12]
-        
-        shadow-[0_10px_30px_rgba(0,0,0,0.45)]
-        
-        transition-all duration-300
-        cursor-pointer
-        
-        hover:bg-white/[0.10]
-        hover:border-white/[0.20]
-        hover:shadow-[0_14px_40px_rgba(0,0,0,0.55)]
-        hover:scale-[1.04]
-        
-        active:scale-[0.97]
-        "
-      >
-        {/* top glass reflection */}
-        <div
-          className="
-          pointer-events-none absolute inset-0 rounded-2xl
-          bg-gradient-to-b
-          from-white/[0.25]
-          via-white/[0.06]
-          to-transparent
-          opacity-30
-        "
-        />
+   <div
+  className="
+    relative overflow-hidden
 
-        {/* subtle inner edge */}
-        <div
-          className="
-          pointer-events-none absolute inset-[1px] rounded-2xl
-          border border-white/[0.06]
-        "
-        />
+    flex flex-col items-center justify-center gap-2
 
-        {!!IconComponent && (
-          <IconComponent
-            size="lg"
-            className="text-white/90 drop-shadow-sm"
-          />
-        )}
+    px-5 py-5
+    rounded-[28px]
 
-        <p className="text-sm font-medium text-white/90 text-center">
-          {item.title}
-        </p>
-      </div>
+    backdrop-blur-3xl
+
+    bg-white/[0.06]
+
+    border border-white/[0.12]
+
+    shadow-[0_8px_30px_rgba(0,0,0,0.35)]
+
+    transition-all duration-300
+    hover:bg-white/[0.08]
+    hover:border-white/[0.18]
+    hover:scale-[1.03]
+  "
+>
+  {/* top highlight */}
+  <div
+    className="
+      absolute inset-x-0 top-0
+      h-[40%]
+      pointer-events-none
+
+      bg-gradient-to-b
+      from-white/[0.15]
+      to-transparent
+    "
+  />
+
+  {/* edge lighting */}
+  <div
+    className="
+      absolute inset-0
+      rounded-[28px]
+      pointer-events-none
+
+      shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]
+    "
+  />
+
+  {/* glass blob */}
+  <div
+    className="
+      absolute
+      -top-8 -right-8
+
+      w-24 h-24
+      rounded-full
+
+      bg-white/[0.08]
+      blur-2xl
+
+      pointer-events-none
+    "
+  />
+
+  {!!IconComponent && (
+    <IconComponent
+      size="lg"
+      className="relative z-10 text-white/90"
+    />
+  )}
+
+  <p className="relative z-10 text-sm font-medium text-white/90">
+    {item.title}
+  </p>
+</div>
     </div>
   );
 };

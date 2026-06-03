@@ -22,7 +22,7 @@ const DraggableWindow: React.FC = () => {
               exit={{ scale: 0, opacity: 0, y: -100 }}
               transition={{ duration: 0.3 }}
             >
-              <Draggable key={tab.id} defaultPosition={{ x: 0, y: -550 }}>
+              <Draggable key={tab.id} defaultPosition={{ x: 0, y: -550 }}  cancel=".close-btn">
                 <div style={{ position: "fixed", zIndex: tab.zIndex }}>
                   <div className={`handle cursor-move p-2.5 w-3xl`}>
                     <WindowTab title={tab.title} tabId={tab.id}>

@@ -58,6 +58,7 @@ const TabContextProvider = ({ children }: { children: React.ReactNode }) => {
         console.log("no tabs open");
         const newZIndex = maxZIndex + 1;
         setActiveTabs([{ ...clickedTab, zIndex: newZIndex }]);
+        setMaxZIndexes(newZIndex);
         setIsWindowOpen(true);
         return;
       }
