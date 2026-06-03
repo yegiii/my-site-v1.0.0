@@ -72,7 +72,7 @@ export default function CanvasBlobs() {
 
     let last = performance.now();
     function frame(now: number) {
-      const dt = (now - last) / 1000;
+      const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
 
       ctx.clearRect(0, 0, W, H);
@@ -80,9 +80,25 @@ export default function CanvasBlobs() {
       blobs.forEach((b) => {
         // — physics —
         b.x += b.vx * dt;
-        if (b.x < 0 || b.x > W) b.vx *= -1;
+        if (b.x < 0) {
+          b.x = 0;
+          b.vx *= -1;
+        }
+        
+        if (b.x > W) {
+          b.x = W;
+          b.vx *= -1;
+        }
         b.y += b.vy * dt;
-        if (b.y < 0 || b.y > H) b.vy *= -1;
+        if (b.y < 0) {
+          b.y = 0;
+          b.vy *= -1;
+        }
+        
+        if (b.y > H) {
+          b.y = H;
+          b.vy *= -1;
+        }
 
         // — morph & color t —
         b.t += dt / 4; // 4s per morph
