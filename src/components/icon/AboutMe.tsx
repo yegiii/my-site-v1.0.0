@@ -6,7 +6,7 @@ type propType = {
   className?: string;
 };
 
-const AboutMe: React.FC<propType> = ({ size = "md", className }) => {
+const AboutMe: React.FC<propType> = ({ size = "md" }) => {
   const sizeMap: Record<size, { width: string; height: string }> = {
     sm: { width: "16", height: "16" },
     md: { width: "32", height: "32" },
@@ -21,6 +21,7 @@ const AboutMe: React.FC<propType> = ({ size = "md", className }) => {
       fill="currentColor"
       viewBox="0 0 64 64"
       version="1.1"
+      //@ts-ignore
       xml:space="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"

@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from "react";
 import * as flubber from "flubber";
+import { useEffect, useRef } from "react";
 
 const BLOB_COUNT = 7;
 

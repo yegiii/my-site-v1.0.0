@@ -6,7 +6,7 @@ type Props = {
   className?: string;
 };
 
-const Email: React.FC<Props> = ({ size = "md", className = "" }) => {
+const Email: React.FC<Props> = ({ size = "md"}) => {
   const sizeMap: Record<Size, { width: string; height: string }> = {
     sm: { width: "16", height: "16" },
     md: { width: "32", height: "32" },
@@ -22,6 +22,7 @@ const Email: React.FC<Props> = ({ size = "md", className = "" }) => {
       fill="currentColor"
       viewBox="0 0 64 64"
       version="1.1"
+      // @ts-ignore
       xml:space="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"

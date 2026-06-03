@@ -3,7 +3,7 @@ import TabGrid from "./TabGrid";
 import Typewriter from "./TypeWritter";
 import DraggableWindow from "./DraggbleWindow";
 import type { ComponentKeys } from "../utils/utils";
-import useBounderies from "../hooks/useBounderies";
+// import useBounderies from "../hooks/useBounderies";
 
 export interface SectionDataType {
   id: number;
@@ -13,7 +13,7 @@ export interface SectionDataType {
 };
 
 const Home = () => {
-  const { minX, minY } = useBounderies()
+  // const { minX, minY } = useBounderies()
   return (
     <WindowTab title="Home" className="!w-2/3 lg:!w-1/2 z-10" showClose={false}>
       <div className="w-full p-4">

@@ -10,6 +10,7 @@ const CardGrid: React.FC = () => {
         {data.sections.map((tab, index) => (
           <li
             key={index}
+            //@ts-ignore
             onClick={(e) => handleTabClick(tab, { x: e.clientX, y: e.clientY })}
           >
             <TabButton key={index} item={tab} />

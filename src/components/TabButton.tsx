@@ -89,6 +89,7 @@ const TabButton: React.FC<propType> = ({ item }) => {
 
   {!!IconComponent && (
     <IconComponent
+    //@ts-ignore
       size="lg"
       className="relative z-10 text-white/90"
     />

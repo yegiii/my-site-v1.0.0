@@ -6,7 +6,7 @@ type Props = {
   className?: string;
 };
 
-const Monitor: React.FC<Props> = ({ size = "md", className = "" }) => {
+const Monitor: React.FC<Props> = ({ size = "md"}) => {
   const sizeMap: Record<Size, { width: string; height: string }> = {
     sm: { width: "16", height: "16" },
     md: { width: "32", height: "32" },
