@@ -1,7 +1,6 @@
 import WindowTab from "./WindowTab";
 import TabGrid from "./TabGrid";
 import Typewriter from "./TypeWritter";
-import DraggableWindow from "./DraggbleWindow";
 import type { ComponentKeys } from "../utils/utils";
 // import useBounderies from "../hooks/useBounderies";
 
@@ -10,51 +9,57 @@ export interface SectionDataType {
   title: string;
   icon: string;
   contentComponent: ComponentKeys;
-};
+}
 
 const Home = () => {
+  // const {activeTabs} = useTabContext()
   // const { minX, minY } = useBounderies()
   return (
-    <WindowTab title="Home" className="w-11/12! md:!w-2/3 lg:!w-1/2 z-10 my-4!" showClose={false}>
-      <div className="w-full ">
-        <div className="flex flex-col min-h-[6rem] transition-all duration-300 px-4 sm:px-8 md:px-12 lg:px-16 mb-2 md:mb-6 bg-gray-900 p-6 sm:p-8 rounded-lg border-l-4 border-amber-500 shadow-xl">
-          {/* Typewriter Header - Responsive text sizing */}
-          <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-white mb-2">
-            <span className="text-amber-400">$ </span>
-            <Typewriter
-              text="Hi, I'm Yeganeh..."
-              cursorStyle="_"
-              textStyle="text-gray-100"
-              speed={80}
-            />
-          </h1>
+    <>
+      {/* <div className="hidden lg:block absolute"> */}
+      {/* </div> */}
+      <WindowTab
+        title="Home"
+        className="w-11/12! md:!w-2/3 lg:!w-1/2 z-0 my-4! overflow-x-hidden"
+        showClose={false}
+      >
+        <div className="w-full ">
+          <div className="flex flex-col min-h-[6rem] transition-all duration-300 px-4 sm:px-8 md:px-12 lg:px-16 mb-2 md:mb-6 bg-gray-900 p-6 sm:p-8 rounded-lg border-l-4 border-amber-500 shadow-xl">
+            {/* Typewriter Header - Responsive text sizing */}
+            <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-white mb-2">
+              <span className="text-amber-400">$ </span>
+              <Typewriter
+                text="Hi, I'm Yeganeh..."
+                cursorStyle="_"
+                textStyle="text-gray-100"
+                speed={80}
+              />
+            </h1>
 
-          {/* Developer Tag - Stack on small screens */}
-          <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
-            <p className="font-mono text-base sm:text-lg md:text-xl text-gray-300 bg-gray-800/50 px-3 sm:px-4 py-1 sm:py-2 rounded-md border border-gray-700 w-fit">
-              <span className="text-amber-400">&lt;</span>
-              <span className="mx-1 text-white">FrontEndDeveloper</span>
-              <span className="text-amber-400">/&gt;</span>
-            </p>
+            {/* Developer Tag - Stack on small screens */}
+            <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
+              <p className="font-mono text-base sm:text-lg md:text-xl text-gray-300 bg-gray-800/50 px-3 sm:px-4 py-1 sm:py-2 rounded-md border border-gray-700 w-fit">
+                <span className="text-amber-400">&lt;</span>
+                <span className="mx-1 text-white">FrontEndDeveloper</span>
+                <span className="text-amber-400">/&gt;</span>
+              </p>
 
-            {/* Version badge - Right-aligned on larger screens */}
-            <span className="sm:ml-3 font-mono text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded w-fit">
-              v2.4.1
-            </span>
+              {/* Version badge - Right-aligned on larger screens */}
+              <span className="sm:ml-3 font-mono text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded w-fit">
+                v4.4.1
+              </span>
+            </div>
+
+            {/* Status bar - Always centered */}
+            <div className="mt-3 sm:mt-4 flex justify-center sm:justify-start items-center text-xs text-gray-400 font-mono">
+              <span className="h-2 w-2 rounded-full bg-green-500 mr-2"></span>
+              <span>Available for work</span>
+            </div>
           </div>
-
-          {/* Status bar - Always centered */}
-          <div className="mt-3 sm:mt-4 flex justify-center sm:justify-start items-center text-xs text-gray-400 font-mono">
-            <span className="h-2 w-2 rounded-full bg-green-500 mr-2"></span>
-            <span>Available for work</span>
-          </div>
+          <TabGrid />
         </div>
-
-        <TabGrid />
-
-        <DraggableWindow />
-      </div>
-    </WindowTab>
+      </WindowTab>
+    </>
   );
 };
 

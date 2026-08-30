@@ -4,27 +4,50 @@ import { useTabContext } from "../hooks/useTabContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { componentMap } from "../utils/utils";
 
-const DraggableWindow: React.FC = () => {
+type DraggableWindowProps = {
+  className?: string;
+};
+
+const DraggableWindow: React.FC<DraggableWindowProps> = ({ className }) => {
   const { activeTabs } = useTabContext();
 
-  console.log("activeTabs", activeTabs);
   return (
-    <>
+    <div className={className}>
       <AnimatePresence>
         {activeTabs.map((tab) => {
           const ContentComponent = componentMap[tab.contentComponent];
 
           return (
             <motion.div
-              key={tab.id}
-              initial={{ scale: 0, opacity: 0, y: -100 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0, opacity: 0, y: -100 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Draggable key={tab.id} defaultPosition={{ x: 0, y: -550 }}  cancel=".close-btn">
-                <div style={{ position: "fixed", zIndex: tab.zIndex }}>
-                  <div className={`handle cursor-move p-2.5 w-3xl`}>
+            key={tab.id}
+            initial={{
+              opacity: 0,
+              y: -15,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              y: -15,
+            }}
+            transition={{
+              duration: 0.45,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+              <Draggable
+                defaultPosition={{ x: -900, y: -100 }}
+                cancel=".close-btn"
+              >
+                <div
+                  style={{
+                    position: "fixed",
+                    zIndex: 100 + tab.zIndex,
+                  }}
+                >
+                  <div className="handle cursor-move p-2.5 w-3xl">
                     <WindowTab title={tab.title} tabId={tab.id}>
                       <div className="max-h-80 overflow-y-scroll">
                         {ContentComponent && <ContentComponent />}
@@ -37,7 +60,7 @@ const DraggableWindow: React.FC = () => {
           );
         })}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 
