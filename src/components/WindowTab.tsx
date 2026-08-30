@@ -22,7 +22,7 @@ const WindowTab: React.FC<WindowProps> = ({
     //  backdrop-blur-[5rem]
     <section
     
-      className={`relative w-full rounded-[28px] bg-white/[0.05] backdrop-blur-lg border border-white/[0.10]
+      className={`relative w-full rounded-[28px] bg-white/[0.05] backdrop-blur-[var(--window-blur)] border border-white/[0.10]
       backdrop-saturate-150 shadow-[0_10px_40px_rgba(0,0,0,0.35)] transition-all duration-500
       ${className}`}
     >

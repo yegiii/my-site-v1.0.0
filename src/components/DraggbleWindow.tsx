@@ -19,24 +19,39 @@ const DraggableWindow: React.FC<DraggableWindowProps> = ({ className }) => {
 
           return (
             <motion.div
-            key={tab.id}
-            initial={{
-              opacity: 0,
-              y: -15,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              y: -15,
-            }}
-            transition={{
-              duration: 0.45,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
+              initial={{
+                opacity: 0,
+                "--window-blur": "0px",
+                // WebkitBackdropFilter: "blur(0px)",
+                scale: 0,
+              }}
+              animate={{
+                opacity: 1,
+                "--window-blur": "24px",
+                // WebkitBackdropFilter: "blur(18px)",
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                "--window-blur": "0px",
+                // backdropFilter: "blur(0px)",
+                // WebkitBackdropFilter: "blur(0px)",
+                scale: 0,
+              }}
+              transition={{
+                opacity: {
+                  duration: 0.3,
+                },
+                scale: {
+                  duration: 0.3,
+                  ease: [0.22, 1, 0.36, 1],
+                },
+                backdropFilter: {
+                  duration: 0.2,
+                  ease: [0.22, 1, 0.36, 1],
+                },
+              }}
+            >
               <Draggable
                 defaultPosition={{ x: -900, y: -100 }}
                 cancel=".close-btn"
