@@ -9,7 +9,7 @@ const LinksContent = () => {
             target="_blank"
             rel="noreferrer"
             className="underline"
-            href="https://github.com/you"
+            href="https://github.com/yegiii"
           >
             GitHub
           </a>
@@ -19,7 +19,7 @@ const LinksContent = () => {
             target="_blank"
             rel="noreferrer"
             className="underline"
-            href="https://linkedin.com/in/you"
+            href="https://www.linkedin.com/in/yeganeh-bakhshi/"
           >
             LinkedIn
           </a>
