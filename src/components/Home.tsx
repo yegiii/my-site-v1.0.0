@@ -15,9 +15,9 @@ export interface SectionDataType {
 const Home = () => {
   // const { minX, minY } = useBounderies()
   return (
-    <WindowTab title="Home" className="!w-2/3 lg:!w-1/2 z-10" showClose={false}>
-      <div className="w-full p-4">
-        <div className="flex flex-col min-h-[6rem] transition-all duration-300 px-4 sm:px-8 md:px-12 lg:px-16 mb-6 bg-gray-900 p-6 sm:p-8 rounded-lg border-l-4 border-amber-500 shadow-xl">
+    <WindowTab title="Home" className="w-11/12! md:!w-2/3 lg:!w-1/2 z-10 my-4!" showClose={false}>
+      <div className="w-full ">
+        <div className="flex flex-col min-h-[6rem] transition-all duration-300 px-4 sm:px-8 md:px-12 lg:px-16 mb-2 md:mb-6 bg-gray-900 p-6 sm:p-8 rounded-lg border-l-4 border-amber-500 shadow-xl">
           {/* Typewriter Header - Responsive text sizing */}
           <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-white mb-2">
             <span className="text-amber-400">$ </span>

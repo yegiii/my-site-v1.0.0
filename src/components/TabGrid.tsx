@@ -5,8 +5,8 @@ import { useTabContext } from "../hooks/useTabContext";
 const CardGrid: React.FC = () => {
   const { handleTabClick } = useTabContext();
   return (
-    <div className="p-4 md:px-6 md:py-4 ">
-      <ul className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div className="p-2 md:p-4 md:px-6 md:py-4 ">
+      <ul className="max-w-6xl mx-auto grid gap-2 grid-cols-2 lg:grid-cols-5 lg:gap-4">
         {data.sections.map((tab, index) => (
           <li
             key={index}

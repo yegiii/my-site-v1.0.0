@@ -21,21 +21,8 @@ const WindowTab: React.FC<WindowProps> = ({
   return (
     <section
     className={`
-      relative
-  
-      w-full rounded-[28px]
-  
-      bg-white/[0.05]
-  
-      border border-white/[0.10]
-  
-      backdrop-blur-[5rem]
-      backdrop-saturate-150
-  
-      shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-  
-      transition-all duration-500
-  
+      relative w-full rounded-[28px] bg-white/[0.05] border border-white/[0.10] backdrop-blur-[5rem]
+      backdrop-saturate-150 shadow-[0_10px_40px_rgba(0,0,0,0.35)] transition-all duration-500
       ${className}
     `}
   >

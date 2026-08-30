@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
      <CanvasBlobs/>
-      <div className="w-full h-screen flex items-center justify-center z-10">
+      <div className="w-ful h-full lg:h-screen flex items-center justify-center z-10 overflow-y-auto">
         <TabContextProvider>
           <Home />
           
