@@ -20,7 +20,7 @@ const Home = () => {
       {/* </div> */}
       <WindowTab
         title="Home"
-        className="w-11/12! md:!w-2/3 lg:!w-1/2 z-0 my-4! overflow-x-hidden"
+        className="w-11/12! md:!w-2/3 lg:!w-1/2 z-0 my-4! overflow-x-hidden "
         showClose={false}
       >
         <div className="w-full ">
