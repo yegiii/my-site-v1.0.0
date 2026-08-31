@@ -13,8 +13,8 @@ export default function App() {
       <div className="w-full h-full lg:h-screen flex items-center justify-center z-10 overflow-y-auto">
         <TabContextProvider>
           <Home />
-          <DraggableWindow className={"hidden lg:block "}/>
-            <MobileBottomSheet className={"lg:hidden "}/>
+          <DraggableWindow className={"hidden lg:block "} />
+          <MobileBottomSheet className={"lg:hidden "} />
         </TabContextProvider>
       </div>
     </>

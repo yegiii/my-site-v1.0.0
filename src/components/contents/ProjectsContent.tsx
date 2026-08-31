@@ -2,7 +2,10 @@ const ProjectsContent = () => {
   return (
     <div >
       <h2 className="text-xl font-bold mb-2">Projects</h2>
-      <ul className="space-y-3 text-sm leading-6  p-4">
+      <ul className="space-y-3 text-sm leading-6  p-2 drop-shadow-2xl list-disc pl-4 ">
+        <li>
+          <span className="font-semibold">Currently working on something exciting 🤩</span>
+        </li>
         <li>
           <span className="font-semibold">Recreate Divar website</span> — Python/Django
         </li>
