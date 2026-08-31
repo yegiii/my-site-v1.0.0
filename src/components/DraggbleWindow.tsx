@@ -8,7 +8,9 @@ type DraggableWindowProps = {
   className?: string;
 };
 
-const DraggableWindow: React.FC<DraggableWindowProps> = ({ className }) => {
+const DraggableWindow: React.FC<DraggableWindowProps> = ({
+  className,
+}) => {
   const { activeTabs } = useTabContext();
 
   return (
@@ -18,60 +20,63 @@ const DraggableWindow: React.FC<DraggableWindowProps> = ({ className }) => {
           const ContentComponent = componentMap[tab.contentComponent];
 
           return (
-            <motion.div
-              initial={{
-                opacity: 0,
-                "--window-blur": "0px",
-                // WebkitBackdropFilter: "blur(0px)",
-                scale: 0,
+            <Draggable
+              key={tab.id}
+              defaultPosition={{
+                x: -900,
+                y: -100,
               }}
-              animate={{
-                opacity: 1,
-                "--window-blur": "24px",
-                // WebkitBackdropFilter: "blur(18px)",
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                "--window-blur": "0px",
-                // backdropFilter: "blur(0px)",
-                // WebkitBackdropFilter: "blur(0px)",
-                scale: 0,
-              }}
-              transition={{
-                opacity: {
-                  duration: 0.3,
-                },
-                scale: {
-                  duration: 0.3,
-                  ease: [0.22, 1, 0.36, 1],
-                },
-                backdropFilter: {
-                  duration: 0.2,
-                  ease: [0.22, 1, 0.36, 1],
-                },
-              }}
+              cancel=".close-btn"
             >
-              <Draggable
-                defaultPosition={{ x: -900, y: -100 }}
-                cancel=".close-btn"
+              <div
+                style={{
+                  position: "fixed",
+                  zIndex: 100 + tab.zIndex,
+                }}
               >
-                <div
-                  style={{
-                    position: "fixed",
-                    zIndex: 100 + tab.zIndex,
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    scale: 0,
+                    "--window-blur": "0px",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    "--window-blur": "16px",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0,
+                    "--window-blur": "0px",
+                  }}
+                  transition={{
+                    opacity: {
+                      duration: 0.3,
+                    },
+                    scale: {
+                      duration: 0.3,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
+                    "--window-blur": {
+                      duration: 0.3,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
                   }}
                 >
                   <div className="handle cursor-move p-2.5 w-3xl">
-                    <WindowTab title={tab.title} tabId={tab.id}>
+                    <WindowTab
+                      title={tab.title}
+                      tabId={tab.id}
+                    >
                       <div className="max-h-80 overflow-y-scroll">
                         {ContentComponent && <ContentComponent />}
                       </div>
                     </WindowTab>
                   </div>
-                </div>
-              </Draggable>
-            </motion.div>
+                </motion.div>
+              </div>
+            </Draggable>
           );
         })}
       </AnimatePresence>
